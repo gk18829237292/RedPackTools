@@ -10,6 +10,7 @@ import android.os.MessageQueue;
 import android.os.Parcelable;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityRecord;
 
 import org.kk.redpacktools.utils.Logger;
 import org.kk.redpacktools.utils.Spref;
@@ -46,7 +47,7 @@ public class MyRedPackService extends AccessibilityService {
      * 监听四种类型
      * 1.typeWindowStateChanged
      * 2.typeWindowContentChanged
-     * 3.typeWindowsChanged TODO 判断这个类型是否需要
+     * 3.typeWindowsChanged TO判断这个类型是否需要 2018年01月05日21:24:44 验证不需要这个类型
      * 4.typeNotificationStateChanged
      *
      * @param event
