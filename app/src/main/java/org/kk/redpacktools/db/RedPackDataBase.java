@@ -9,5 +9,5 @@ import org.kk.redpacktools.db.entities.RedPackLog;
 
 @Database(entities = {RedPackLog.class}, version = 1)
 public abstract class RedPackDataBase extends RoomDatabase {
-    public abstract RedPackDao getRedPackDao();
+    public abstract RedPackDao redPackDao();
 }

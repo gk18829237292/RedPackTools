@@ -8,46 +8,15 @@ import java.util.Date;
 
 @Entity
 public class RedPackLog {
-    @PrimaryKey
-    private int id;
 
-    private String name;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
 
-    private double money;
+    public String name;
 
-    private long time;
+    public double money;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getMoney() {
-        return money;
-    }
-
-    public void setMoney(double money) {
-        this.money = money;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public long time;
 
     public RedPackLog(String name, double money, long time) {
         this.name = name;
@@ -55,14 +24,10 @@ public class RedPackLog {
         this.time = time;
     }
 
-    public RedPackLog(String name, double money) {
-        this(name,money,new Date().getTime());
-    }
-
     @Override
     public String toString() {
         return "RedPackLog{" +
-                "name='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", money=" + money +
                 ", time=" + time +
                 '}';

@@ -3,6 +3,7 @@ package org.kk.redpacktools.service;
 import android.accessibilityservice.AccessibilityService;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -13,6 +14,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityRecord;
 
 import org.kk.redpacktools.App;
+import org.kk.redpacktools.db.dao.RedPackDao;
 import org.kk.redpacktools.db.entities.RedPackLog;
 import org.kk.redpacktools.utils.Logger;
 import org.kk.redpacktools.utils.Spref;
@@ -228,7 +230,24 @@ public class MyRedPackService extends AccessibilityService {
     }
 
     private void write2Log(double money, String name) {
-//        App.getDB().getRedPackDao().insert(new RedPackLog(name,money));
-//        Logger.d(Arrays.asList(App.getDB().getRedPackDao().queryAll()).toString());
+//        App.getDB().redPackDao().insert(new RedPackLog(name,money,new Date().getTime()));
+        RedPackDao dao = App.getDB().redPackDao();
+
+        new AsyncTask<Void,Void,Integer>(){
+
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                dao.insert(new RedPackLog(name,money,new Date().getTime()));
+                Logger.d(Arrays.asList(App.getDB().redPackDao().queryAll()).toString());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                super.onPostExecute(integer);
+            }
+
+
+        }.execute();
     }
 }

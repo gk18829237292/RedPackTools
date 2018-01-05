@@ -17,7 +17,7 @@ public class App extends Application{
         super.onCreate();
         mInstance = this;
         mContenxt = this;
-//        mDb = Room.databaseBuilder(this,RedPackDataBase.class,"redPackLog").build();
+        mDb = Room.databaseBuilder(this,RedPackDataBase.class,"redPackLog").build();
     }
 
     public static App getInstance(){

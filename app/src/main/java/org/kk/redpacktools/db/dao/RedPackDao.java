@@ -6,15 +6,17 @@ import android.arch.persistence.room.Query;
 
 import org.kk.redpacktools.db.entities.RedPackLog;
 
+import java.util.List;
+
 @Dao
 public interface RedPackDao {
 
     @Query("select * from RedPackLog")
-    RedPackLog[] queryAll();
+    List<RedPackLog> queryAll();
 
     @Insert
     void insert(RedPackLog redPackLog);
 
     @Query("select * from RedPackLog where name = :name")
-    RedPackLog[] queryByName(String name);
+    List<RedPackLog> queryByName(String name);
 }
