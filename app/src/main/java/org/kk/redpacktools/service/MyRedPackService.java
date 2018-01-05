@@ -12,6 +12,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityRecord;
 
+import org.kk.redpacktools.App;
+import org.kk.redpacktools.db.entities.RedPackLog;
 import org.kk.redpacktools.utils.Logger;
 import org.kk.redpacktools.utils.Spref;
 
@@ -101,10 +103,11 @@ public class MyRedPackService extends AccessibilityService {
         String moneyViewId = "com.tencent.mm:id/byw";
         node = findNodeInfoByViewId(rootNodeInfo, moneyViewId, null);
         if (node != null) {
-            Logger.d("领到红包");
+
+            Logger.d("领到红包 %d",event.getWindowId());
             mIsInRedPack = false;
             //如果是在聊天界面
-            String money = node.getText().toString();
+            double money = Double.parseDouble(node.getText().toString());
             String name = "未知";
             String nameViewId = "com.tencent.mm:id/bys";
             node = findNodeInfoByViewId(rootNodeInfo, nameViewId, null);
@@ -224,10 +227,8 @@ public class MyRedPackService extends AccessibilityService {
         performGlobalAction(GLOBAL_ACTION_BACK);
     }
 
-    static DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
-    private void write2Log(String money, String name) {
-        String time = format.format(new Date());
-        //TODO 待实现
+    private void write2Log(double money, String name) {
+//        App.getDB().getRedPackDao().insert(new RedPackLog(name,money));
+//        Logger.d(Arrays.asList(App.getDB().getRedPackDao().queryAll()).toString());
     }
 }
