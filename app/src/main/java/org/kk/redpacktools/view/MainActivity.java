@@ -59,9 +59,11 @@ public class MainActivity extends BaseActivity {
     private boolean isServiceStart(){
         boolean result = false;
         AccessibilityManager manager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
+
         List<AccessibilityServiceInfo> serviceInfos = manager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_GENERIC);
         for (AccessibilityServiceInfo serviceInfo:serviceInfos){
-            if(serviceInfo.getId().equals(getPackageName()+"/org.kk.redpacktools.service.RedPackService")){
+            Logger.d(serviceInfo.getId());
+            if(serviceInfo.getId().equals(getPackageName()+"/.service.MyRedPackService")){
                 result = true;
                 break;
             }
