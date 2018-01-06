@@ -22,6 +22,9 @@
             android:text="18:99"
             android:textSize="14sp"
             android:layout_centerVertical="true"
+            android:gravity="right"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_msg"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 

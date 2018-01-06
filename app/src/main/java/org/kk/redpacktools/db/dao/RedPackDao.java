@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface RedPackDao {
 
-    @Query("select * from RedPackLog")
+    @Query("select * from RedPackLog order by time desc")
     List<RedPackLog> queryAll();
 
     @Insert

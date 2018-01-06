@@ -81,7 +81,7 @@ public class LogActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             RedPackLog redPackLog = redPackLogs.get(position);
-            holder.tv_msg.setText(String.format("%d 收到来自 %s 的红包：%.2f ", position + 1, redPackLog.name, redPackLog.money));
+            holder.tv_msg.setText(String.format("%d. 收到来自 %s 的红包：%.2f ", position + 1, redPackLog.name, redPackLog.money));
             holder.tv_time.setText(TimeUtils.getDescriptionTimeFromTimestamp(redPackLog.time));
         }
 
