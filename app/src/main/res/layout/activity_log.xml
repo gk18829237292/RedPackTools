@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.LogActivity"
+    android:paddingLeft="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="统计信息"
+        android:textSize="18sp"
+        android:textColor="@color/colorRed"
+        android:layout_marginTop="5dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGrey_100"
+        android:orientation="vertical"
+        android:paddingBottom="5dp"
+        >
+        <TextView
+            android:id="@+id/tv_totalMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总金额：----"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tv_totalCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总次数：----"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日志流水"
+        android:textSize="18sp"
+        android:textColor="@color/colorRed"
+        android:layout_marginTop="5dp"
+        />
+    <!--<android.support.v7.app.RecycleListView-->
+        <!--android:id="@+id/list_logs"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+    <!--</android.support.v7.app.RecycleListView>-->
+
+</LinearLayout>

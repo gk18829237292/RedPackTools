@@ -32,6 +32,9 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
+
+        <activity android:name=".view.LogActivity"
+            android:label="红包日志"></activity>
     </application>
 
 </manifest>

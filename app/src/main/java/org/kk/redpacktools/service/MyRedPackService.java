@@ -5,13 +5,10 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.os.AsyncTask;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.os.MessageQueue;
 import android.os.Parcelable;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
-import android.view.accessibility.AccessibilityRecord;
 
 import org.kk.redpacktools.App;
 import org.kk.redpacktools.db.dao.RedPackDao;
@@ -19,13 +16,13 @@ import org.kk.redpacktools.db.entities.RedPackLog;
 import org.kk.redpacktools.utils.Logger;
 import org.kk.redpacktools.utils.Spref;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import io.reactivex.Flowable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MyRedPackService extends AccessibilityService {
 
@@ -34,7 +31,7 @@ public class MyRedPackService extends AccessibilityService {
     private LinkedList<PendingIntent> pendingIntents = new LinkedList<>();
     private boolean mIsInRedPack = false; //是否在处理红包
 
-    private  Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             Logger.d("receive msg");
@@ -106,7 +103,7 @@ public class MyRedPackService extends AccessibilityService {
         node = findNodeInfoByViewId(rootNodeInfo, moneyViewId, null);
         if (node != null) {
 
-            Logger.d("领到红包 %d",event.getWindowId());
+            Logger.d("领到红包 %d", event.getWindowId());
             mIsInRedPack = false;
             //如果是在聊天界面
             double money = Double.parseDouble(node.getText().toString());
@@ -230,24 +227,13 @@ public class MyRedPackService extends AccessibilityService {
     }
 
     private void write2Log(double money, String name) {
-//        App.getDB().redPackDao().insert(new RedPackLog(name,money,new Date().getTime()));
-        RedPackDao dao = App.getDB().redPackDao();
-
-        new AsyncTask<Void,Void,Integer>(){
-
-            @Override
-            protected Integer doInBackground(Void... voids) {
-                dao.insert(new RedPackLog(name,money,new Date().getTime()));
-                Logger.d(Arrays.asList(App.getDB().redPackDao().queryAll()).toString());
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Integer integer) {
-                super.onPostExecute(integer);
-            }
-
-
-        }.execute();
+        RedPackLog redPackLog = new RedPackLog(name, money, new Date().getTime());
+        Flowable.just(redPackLog).subscribeOn(Schedulers.io()).observeOn(Schedulers.single()).subscribe((log)->{
+            App.getDB().redPackDao().insert(log);
+        });
     }
+
+
+
+
 }

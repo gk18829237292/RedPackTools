@@ -36,6 +36,8 @@ public class MainActivity extends BaseActivity {
         sw_startService.setOnClickListener(l->{
             startActivity(settingIntent);
         });
+
+        tv_redPackLog.setOnClickListener(l->startActivity(new Intent(mContext,LogActivity.class)));
     }
 
     @Override
