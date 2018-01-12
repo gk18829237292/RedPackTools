@@ -160,6 +160,7 @@ public class MyRedPackService extends AccessibilityService {
 
     private void handleNotificationStateChanged(AccessibilityEvent event) {
         String content = event.getText().toString();
+        Logger.d("content is " + content);
         //不是微信红包，不处理
         if (!content.contains("[微信红包]")) {
             return;

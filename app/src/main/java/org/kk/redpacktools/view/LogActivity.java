@@ -44,8 +44,8 @@ public class LogActivity extends BaseActivity {
     }
 
     @Override
-    void initData() {
-
+    protected void onResume() {
+        super.onResume();
         Flowable.fromCallable(() ->
                 App.getDB().redPackDao().queryAll()
         ).subscribeOn(Schedulers.io()).observeOn(Schedulers.single()).subscribe((logs) -> {
@@ -58,6 +58,10 @@ public class LogActivity extends BaseActivity {
             mylogs.addAll(logs);
             adapter.notifyDataSetChanged();
         });
+    }
+
+    @Override
+    void initData() {
 
     }
 
