@@ -15,6 +15,7 @@ import org.kk.redpacktools.db.dao.RedPackDao;
 import org.kk.redpacktools.db.entities.RedPackLog;
 import org.kk.redpacktools.utils.Logger;
 import org.kk.redpacktools.utils.Spref;
+import org.kk.redpacktools.utils.ToastUtils;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -93,6 +94,15 @@ public class MyRedPackService extends AccessibilityService {
         AccessibilityNodeInfo node = findNodeInfoByViewId(rootNodeInfo, btnViewId, null);
         if (node != null) {
             Logger.d("点开红包");
+//            int rand = (int) (Math.random() * 500) +100;
+//            try {
+//                Thread.sleep(rand);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }finally {
+//                doClick(node);
+//                handler.removeCallbacks(null);
+//            }
             doClick(node);
             handler.removeCallbacks(null);
             return;
@@ -113,6 +123,7 @@ public class MyRedPackService extends AccessibilityService {
             if (node != null) {
                 name = node.getText().toString();
                 write2Log(money, name);
+                ToastUtils.showLongToast(getApplicationContext(),String.format("领到%d",money));
             }
             handler.sendEmptyMessage(1);
             return;
